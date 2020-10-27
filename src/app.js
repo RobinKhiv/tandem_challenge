@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const {NODE_ENV} = require('./config');
+const questionsRouter = require('./routes/questions-router');
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.use(helmet());
 app.get('/', (req,res) => {
   res.send('Hello, World!');
 });
+
+app.use('/api/questions', questionsRouter);
+
 app.use(function errorHandler(error, req, res, next) {
   let response;
   if (NODE_ENV === 'production') {
